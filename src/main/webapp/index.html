@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>:: student ::</title>
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	 crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	 crossorigin="anonymous">
+	<link rel="stylesheet" href="application.css">
+</head>
+
+<body>
+	<div class="container" id="content">
+		<section class="jumbotron">
+			<section id="app__header">
+				<a @click="home()"> <span class="glyphicon glyphicon-home"></span> Home</a> 
+				<a @click="create()"> <span class="glyphicon glyphicon-floppy-save"></span> Create</a> 
+				<a @click="update()"><span class="glyphicon glyphicon-edit"></span> Update</a> 
+				<a @click="deleteE()"><span class="glyphicon glyphicon-trash"></span>Delete</a> 
+				<a @click="other()"> <span class="glyphicon glyphicon-th"></span> Other</a> 
+				<a @click="search()"><span class="glyphicon glyphicon-search"></span>Search</a>
+			</section>
+		</section>
+		<h1 class="text-center">{{title}}</h1>
+		
+		<div class="jumbotron">
+			<!--HOME start-->
+			<section id="app__home" v-if="display == 'HOME'">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>firstName</th>
+							<th>lastName</th>
+							<th>dob</th>
+							<th>parentsName</th>
+							<th>address</th>
+							<th>contact</th>
+							<th>subject</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="(student,index) in [1,2,3]">
+							<td>
+								<div class="form-group has-success">
+									<input type="text" class="form-control" v-if="hasToBeEdit(index)">
+									<span class="help-block" v-else>text</span>
+								</div>
+							</td>
+							<td>
+								<div class="form-group has-success">
+									<input type="text" class="form-control" v-if="hasToBeEdit(index)">
+									<span class="help-block" v-else>text</span>
+								</div>
+							</td>
+							<td>
+								<div class="form-group has-success">
+									<input type="text" class="form-control" v-if="hasToBeEdit(index)">
+									<span class="help-block" v-else>text</span>
+								</div>
+							</td>
+							<td>
+								<div class="form-group has-success">
+									<input type="text" class="form-control" v-if="hasToBeEdit(index)">
+									<span class="help-block" v-else>text</span>
+								</div>
+							</td>
+							<td>
+								<div class="form-group has-success">
+									<input type="text" class="form-control" v-if="hasToBeEdit(index)">
+									<span class="help-block" v-else>text</span>
+								</div>
+							</td>
+							<td>
+								<div class="form-group has-success">
+									<input type="text" class="form-control" v-if="hasToBeEdit(index)">
+									<span class="help-block" v-else>text</span>
+								</div>
+							</td>
+							<td>
+								<div class="form-group has-success">
+									<input type="text" class="form-control" v-if="hasToBeEdit(index)">
+									<span class="help-block" v-else>text</span>
+								</div>
+							</td>
+							<td>
+								<div class="form-group">
+									<a @click="toBeEdit(index)"><span class="glyphicon glyphicon-edit"></span></a>
+									<a href="#"><span class="glyphicon glyphicon-trash"></span></a>
+									<a href="#"><span class="glyphicon glyphicon-refresh" v-if="hasToBeEdit(index)" @click="resetEdit(null)"></span></a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			<!--HOME end-->
+
+			<!--CREATE start-->
+			<section id="app__create" v-if="display == 'CREATE'">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group has-success">
+							<label class="control-label" for="firstName">First Name</label>
+							<input type="text" class="form-control" id="firstName" aria-describedby="firstName">
+							<span id="firstName__error" class="help-block">error to be display</span>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group has-success">
+							<label class="control-label" for="lastname">Last Name (surname)</label>
+							<input type="text" class="form-control" id="lastname" aria-describedby="lastname">
+							<span id="lastname__error" class="help-block">error to be display</span>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group has-success">
+							<label class="control-label" for="dob">Date Of Birth</label>
+							<input type="text" class="form-control" id="dob" aria-describedby="dob">
+							<span id="dob__error" class="help-block">error to be display</span>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group has-success">
+							<label class="control-label" for="parentname">Parent's Name</label>
+							<input type="text" class="form-control" id="parentname" aria-describedby="parentname">
+							<span id="parentname__error" class="help-block">error </span>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group has-success">
+							<label class="control-label" for="address1">Address</label>
+							<input type="text" class="form-control" id="address1" aria-describedby="address1">
+							<span id="address1__error" class="help-block">error</span>
+						</div>
+					</div>
+					
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group has-success">
+							<label class="control-label" for="contactnumber">Contact Number</label>
+							<input type="text" class="form-control" id="contactnumber" aria-describedby="contactnumber">
+							<span id="contactnumber__error" class="help-block">error</span>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group has-success">
+							<label class="control-label" for="subject">Subject</label>
+							<input type="text" class="form-control" id="subject" aria-describedby="subject">
+							<span id="subject__error" class="help-block">error</span>
+						</div>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-info">Submit</button>
+			</section>
+			<!--CREATE end-->
+			
+			<!--UPDATE start-->
+			<section id="app__update" v-if="display == 'UPDATE'">
+				update
+			</section>
+			<!--UPDATE end-->
+
+			<!--DELETE start-->
+			<section id="app__delete" v-if="display == 'DELETE'">
+				delete
+			</section>
+			<!--DELETE end-->
+
+			<!--OTHER start-->
+			<section id="app__other" v-if="display == 'OTHER'">
+				other
+			</section>
+			<!--OTHER end-->
+
+			<!--SEARCH start-->
+			<section id="app__search" v-if="display == 'SEARCH'">
+				search
+			</section>
+			<!--SEARCH end-->
+
+		</div>
+
+		<section id="footer">
+			<hr />
+			<footer>
+				<small>all right received</small>
+			</footer>
+		</section>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	 crossorigin="anonymous"></script>
+	<script src="application.js"></script>
+</body>
+
+</html>
