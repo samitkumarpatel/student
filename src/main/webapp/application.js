@@ -5,32 +5,44 @@ var app1 = new Vue({
 		name : 'Like',
 		title : 'Home',
 		display : 'HOME',
-		editIndex : null
+		editIndex : null,
+		submenu : { entity : 'MENU', flag : false},
+		student:{id:null,name:null,address:null,contactNumber:null,partOfClass:[]},
+		teacher:{id:null,name:null,address:null,qualification:null,expertInSubject:[]},
+		subject:{id:null,name:null,teachersId:[],subjectArePartOfClass:[]},
+		attendance:{id:null,date:null,attendanceBy:null,attendanceForClass:null,availableStudentsOnDate:[]},
+		class:{id:null,name:null,students:[]} ,
+		dynamicForm : null
 	},
 	methods : {
+		entity : function(p) {
+			this.submenu.entity = p
+			this.submenu.flag = p != 'HOME' ? true : false
+			this.display = "ALL"
+		},
 		home : function() {
 			this.title = "Home"
 			this.display = "HOME"
 		},
-		create : function() {
+		create : function(p) {
 			this.title = "Create"
 			this.display = "CREATE"
+			this.prepareDynamicForm(p.entity,this.display)
 		},
-		update : function() {
+		update : function(p) {
 			this.title = "Update"
 			this.display = "UPDATE"
+			this.prepareDynamicForm(p.entity,this.display)
 		},
-		deleteE : function() {
+		deleteE : function(p) {
 			this.title = "Delete"
 			this.display = "DELETE"
+			this.prepareDynamicForm(p.entity,this.display)
 		},
-		other : function() {
-			this.title = "Other"
-			this.display = "OTHER"
-		},
-		search : function() {
+		search : function(p) {
 			this.title = "Search"
 			this.display = "SEARCH"
+			this.prepareDynamicForm(p.entity,this.display)
 		},
 		hasToBeEdit : function(index) {
 			return index == this.editIndex;
@@ -40,6 +52,11 @@ var app1 = new Vue({
 		},
 		resetEdit : function() {
 			this.editIndex = null
+		},
+		prepareDynamicForm : function(forEntity, operation) {
+			var e = forEntity.toLowerCase()
+			console.log(e,operation)
+			console.log(app1._data)
 		}
 	}
 });

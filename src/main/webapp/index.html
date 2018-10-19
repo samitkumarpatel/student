@@ -22,20 +22,40 @@
 <body>
 	<div class="container" id="content">
 		<section class="jumbotron">
-			<section id="app__header">
-				<a @click="home()"> <span class="glyphicon glyphicon-home"></span> Home</a> 
-				<a @click="create()"> <span class="glyphicon glyphicon-floppy-save"></span> Create</a> 
-				<a @click="update()"><span class="glyphicon glyphicon-edit"></span> Update</a> 
-				<a @click="deleteE()"><span class="glyphicon glyphicon-trash"></span>Delete</a> 
-				<a @click="other()"> <span class="glyphicon glyphicon-th"></span> Other</a> 
-				<a @click="search()"><span class="glyphicon glyphicon-search"></span>Search</a>
+			<section id="app__menu">
+				<a @click="home()"> <span class="glyphicon glyphicon-home"></span>Home</a>
+				<a @click="entity('STUDENT')">Student</a>
+				<a @click="entity('TEACHER')">Teacher</a>
+				<a @click="entity('SUBJECT')">Subject</a>
+				<a @click="entity('CLASS')">Class</a>
+				<a @click="entity('ATTENDANNCE')">Attendance</a>
+			</section>
+			<hr/>
+			<section id="app__header" v-if="submenu.flag" class="text-right">
+				<span>({{submenu.entity}})</span>				 
+				<a @click="create(submenu)"> <span class="glyphicon glyphicon-floppy-save"></span>Create</a> 
+				<a @click="update(submenu)"><span class="glyphicon glyphicon-edit"></span>Update</a> 
+				<a @click="deleteE(submenu)"><span class="glyphicon glyphicon-trash"></span>Delete</a>
+				<a @click="search(submenu)"><span class="glyphicon glyphicon-search"></span>Search</a>
 			</section>
 		</section>
-		<h1 class="text-center">{{title}}</h1>
 		
-		<div class="jumbotron">
-			<!--HOME start-->
-			<section id="app__home" v-if="display == 'HOME'">
+		<!--ALL start-->
+		<section id="app__alert" v-if="display == 'ALL'">
+			<div class="alert alert-info" role="alert">Please select a menu from right corner of the page</div>
+		</section>
+		<!--ALL end-->
+		
+		<!--HOME start-->
+		<section id="app__home" v-if="display == 'HOME'">
+			home page is under construction
+		</section>
+		<!--HOME end-->
+
+		<div class="jumbotron" v-if="display != 'ALL' && display != 'HOME'">
+			
+			<!--CREATE start-->
+			<section id="app__create" v-if="display == 'CREATE'">
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -103,68 +123,6 @@
 						</tr>
 					</tbody>
 				</table>
-			</section>
-			<!--HOME end-->
-
-			<!--CREATE start-->
-			<section id="app__create" v-if="display == 'CREATE'">
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group has-success">
-							<label class="control-label" for="firstName">First Name</label>
-							<input type="text" class="form-control" id="firstName" aria-describedby="firstName">
-							<span id="firstName__error" class="help-block">error to be display</span>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group has-success">
-							<label class="control-label" for="lastname">Last Name (surname)</label>
-							<input type="text" class="form-control" id="lastname" aria-describedby="lastname">
-							<span id="lastname__error" class="help-block">error to be display</span>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group has-success">
-							<label class="control-label" for="dob">Date Of Birth</label>
-							<input type="text" class="form-control" id="dob" aria-describedby="dob">
-							<span id="dob__error" class="help-block">error to be display</span>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group has-success">
-							<label class="control-label" for="parentname">Parent's Name</label>
-							<input type="text" class="form-control" id="parentname" aria-describedby="parentname">
-							<span id="parentname__error" class="help-block">error </span>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group has-success">
-							<label class="control-label" for="address1">Address</label>
-							<input type="text" class="form-control" id="address1" aria-describedby="address1">
-							<span id="address1__error" class="help-block">error</span>
-						</div>
-					</div>
-					
-				</div>
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group has-success">
-							<label class="control-label" for="contactnumber">Contact Number</label>
-							<input type="text" class="form-control" id="contactnumber" aria-describedby="contactnumber">
-							<span id="contactnumber__error" class="help-block">error</span>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group has-success">
-							<label class="control-label" for="subject">Subject</label>
-							<input type="text" class="form-control" id="subject" aria-describedby="subject">
-							<span id="subject__error" class="help-block">error</span>
-						</div>
-					</div>
-				</div>
-				<button type="submit" class="btn btn-info">Submit</button>
 			</section>
 			<!--CREATE end-->
 			
