@@ -12,7 +12,7 @@ var app1 = new Vue({
 		subject:{id:null,name:null,teachersId:[],subjectArePartOfClass:[]},
 		attendance:{id:null,date:null,attendanceBy:null,attendanceForClass:null,availableStudentsOnDate:[]},
 		class:{id:null,name:null,students:[]} ,
-		dynamicForm : null
+		dynamicFormData : null
 	},
 	methods : {
 		entity : function(p) {
@@ -55,8 +55,7 @@ var app1 = new Vue({
 		},
 		prepareDynamicForm : function(forEntity, operation) {
 			var e = forEntity.toLowerCase()
-			console.log(e,operation)
-			console.log(app1._data)
+			this.dynamicFormData = Object.keys(app1._data[e])
 		}
 	}
 });

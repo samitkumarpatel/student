@@ -28,11 +28,11 @@
 				<a @click="entity('TEACHER')">Teacher</a>
 				<a @click="entity('SUBJECT')">Subject</a>
 				<a @click="entity('CLASS')">Class</a>
-				<a @click="entity('ATTENDANNCE')">Attendance</a>
+				<a @click="entity('ATTENDANCE')">Attendance</a>
 			</section>
 			<hr/>
 			<section id="app__header" v-if="submenu.flag" class="text-right">
-				<span>({{submenu.entity}})</span>				 
+				<span>{{submenu.entity}} - </span>				 
 				<a @click="create(submenu)"> <span class="glyphicon glyphicon-floppy-save"></span>Create</a> 
 				<a @click="update(submenu)"><span class="glyphicon glyphicon-edit"></span>Update</a> 
 				<a @click="deleteE(submenu)"><span class="glyphicon glyphicon-trash"></span>Delete</a>
@@ -59,65 +59,20 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>firstName</th>
-							<th>lastName</th>
-							<th>dob</th>
-							<th>parentsName</th>
-							<th>address</th>
-							<th>contact</th>
-							<th>subject</th>
-							<th></th>
+							<th v-for="(col,index) in dynamicFormData" :key="index">{{col}}</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="(student,index) in [1,2,3]">
-							<td>
+						<tr>
+							<td v-for="(student,index) in dynamicFormData" :key="index">
 								<div class="form-group has-success">
-									<input type="text" class="form-control" v-if="hasToBeEdit(index)">
-									<span class="help-block" v-else>text</span>
-								</div>
-							</td>
-							<td>
-								<div class="form-group has-success">
-									<input type="text" class="form-control" v-if="hasToBeEdit(index)">
-									<span class="help-block" v-else>text</span>
-								</div>
-							</td>
-							<td>
-								<div class="form-group has-success">
-									<input type="text" class="form-control" v-if="hasToBeEdit(index)">
-									<span class="help-block" v-else>text</span>
-								</div>
-							</td>
-							<td>
-								<div class="form-group has-success">
-									<input type="text" class="form-control" v-if="hasToBeEdit(index)">
-									<span class="help-block" v-else>text</span>
-								</div>
-							</td>
-							<td>
-								<div class="form-group has-success">
-									<input type="text" class="form-control" v-if="hasToBeEdit(index)">
-									<span class="help-block" v-else>text</span>
-								</div>
-							</td>
-							<td>
-								<div class="form-group has-success">
-									<input type="text" class="form-control" v-if="hasToBeEdit(index)">
-									<span class="help-block" v-else>text</span>
-								</div>
-							</td>
-							<td>
-								<div class="form-group has-success">
-									<input type="text" class="form-control" v-if="hasToBeEdit(index)">
-									<span class="help-block" v-else>text</span>
+									<input type="text" class="form-control" >
+									<span class="help-block">text</span>
 								</div>
 							</td>
 							<td>
 								<div class="form-group">
-									<a @click="toBeEdit(index)"><span class="glyphicon glyphicon-edit"></span></a>
-									<a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-									<a href="#"><span class="glyphicon glyphicon-refresh" v-if="hasToBeEdit(index)" @click="resetEdit(null)"></span></a>
+									....
 								</div>
 							</td>
 						</tr>
