@@ -56,6 +56,13 @@ var app1 = new Vue({
 		prepareDynamicForm : function(forEntity, operation) {
 			var e = forEntity.toLowerCase()
 			this.dynamicFormData = Object.keys(app1._data[e])
+		},
+		getAll : function(entity) {
+			console.log("getAll for - %s",entity);
+			if(entity == 'STUDENT')
+				return [{'id':1001,'name':'samit'},{'id':1002,'name':'seema'}]
+			else
+				return []
 		}
 	}
 });

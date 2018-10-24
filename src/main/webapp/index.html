@@ -42,13 +42,20 @@
 		
 		<!--ALL start-->
 		<section id="app__alert" v-if="display == 'ALL'">
-			<div class="alert alert-info" role="alert">Please select a menu from right corner of the page</div>
+			<table class="table table-striped">
+				<tbody>
+					<tr v-for="(item,index) in getAll(submenu.entity)" :key="index">
+						<td v-for="(col,idx) in Object.keys(item)" :key="idx">{{item[col]}}</td>
+						<td>...</td>
+					</tr>
+				</tbody>
+			</table>
 		</section>
 		<!--ALL end-->
 		
 		<!--HOME start-->
 		<section id="app__home" v-if="display == 'HOME'">
-			home page is under construction
+			<p>home page for the user - which is under construction!</p>
 		</section>
 		<!--HOME end-->
 
@@ -83,7 +90,11 @@
 			
 			<!--UPDATE start-->
 			<section id="app__update" v-if="display == 'UPDATE'">
-				update
+				<div class="form-group has-success">
+					<span class="help-block">Entity : {{submenu.entity}} | Operation: {{display}} - search parameter can be id or name</span>
+					<input type="text" class="input-sm">
+					<a href="#" class="btn btn-info btn-sm" @click="search(submenu.entity)">Search</a>
+				</div>
 			</section>
 			<!--UPDATE end-->
 
